@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtThink - 素材库</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <style>
+        .add-material-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 64px;
+            background: #FF4081;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.2s;
+        }
+        .add-material-btn:active {
+            transform: translateX(-50%) scale(0.9);
+        }
+        .add-material-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="gallery-nav">
+        <div style="display:flex; align-items:center; gap:20px;">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" width="20" height="20">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>返回</span>
+            </a>
+        </div>
+        <div class="gallery-title"></div>
+        <div class="right-controls">
+            <svg class="bell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 主体区域 -->
+    <main class="gallery-content" style="padding-bottom: 120px;">
+        <div class="gallery-header">
+            <h1>我的素材库</h1>
+            <p>上传你的专属素材，它们将自动同步到工作室画板的百宝箱中哦！</p>
+        </div>
+
+        <div id="materials-grid" class="gallery-grid">
+            <!-- Uploaded materials will be populated here -->
+        </div>
+
+        <!-- 悬浮上传按钮 -->
+        <label class="add-material-btn">
+            <input type="file" id="material-upload" accept="image/*" style="display:none;" onchange="uploadMaterial(event)">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        </label>
+    </main>
+
+    <script src="js/work_service.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            MaterialService.renderMaterials('materials-grid');
+        });
+
+        function uploadMaterial(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    MaterialService.addMaterial(e.target.result);
+                    MaterialService.renderMaterials('materials-grid');
+                };
+                reader.readAsDataURL(file);
+            }
+            // Reset input
+            event.target.value = '';
+        }
+    </script>
+</body>
+
+</html>

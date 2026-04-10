@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtThink - 我的作品</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <style>
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 100px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="gallery-nav">
+        <div style="display:flex; align-items:center; gap:20px;">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" width="20" height="20">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>返回</span>
+            </a>
+        </div>
+        <div class="gallery-title"></div>
+        <div class="right-controls">
+            <svg class="bell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 主体区域 -->
+    <main class="gallery-content">
+        <div class="gallery-header">
+            <h1>我的作品集</h1>
+            <p>这里记录了你每一次灵光闪现的瞬间</p>
+        </div>
+
+        <div id="my-works-grid" class="gallery-grid">
+            <!-- Works will be populated by WorkService -->
+        </div>
+    </main>
+
+    <script src="js/work_service.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            WorkService.renderWorks('my-works-grid');
+        });
+    </script>
+</body>
+
+</html>

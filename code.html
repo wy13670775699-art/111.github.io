@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArtPlay - 创意艺术中心</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#86cbff",
+              "on-secondary-container": "#004c71",
+              "secondary-fixed": "#a7d7ff",
+              "on-primary-container": "#594a00",
+              "primary-fixed-dim": "#edc600",
+              "surface-dim": "#d4d5d0",
+              "on-secondary-fixed-variant": "#00567f",
+              "inverse-on-surface": "#9d9d9a",
+              "on-primary-fixed": "#433700",
+              "surface-bright": "#f7f6f2",
+              "on-tertiary-container": "#66002b",
+              "secondary": "#00618f",
+              "outline": "#767774",
+              "on-tertiary-fixed": "#380014",
+              "on-surface": "#2e2f2d",
+              "surface-container-highest": "#ddddd8",
+              "tertiary-dim": "#a00047",
+              "tertiary-fixed-dim": "#ff769b",
+              "surface": "#f7f6f2",
+              "tertiary": "#b60051",
+              "surface-container-low": "#f1f1ed",
+              "primary-container": "#fdd400",
+              "on-background": "#2e2f2d",
+              "surface-tint": "#6d5a00",
+              "inverse-primary": "#fdd400",
+              "on-primary": "#fff2ce",
+              "on-primary-fixed-variant": "#645300",
+              "tertiary-container": "#ff8fa9",
+              "inverse-surface": "#0d0f0d",
+              "on-tertiary": "#ffeff0",
+              "surface-container": "#e8e8e4",
+              "secondary-container": "#a7d7ff",
+              "on-secondary-fixed": "#003855",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#770033",
+              "primary-fixed": "#fdd400",
+              "outline-variant": "#adadaa",
+              "surface-variant": "#ddddd8",
+              "tertiary-fixed": "#ff8fa9",
+              "on-secondary": "#eaf4ff",
+              "primary": "#6d5a00",
+              "surface-container-high": "#e3e3de",
+              "on-surface-variant": "#5b5c59",
+              "primary-dim": "#5f4e00",
+              "error": "#b02500",
+              "error-dim": "#b92902",
+              "on-error": "#ffefec",
+              "background": "#f7f6f2",
+              "on-error-container": "#520c00",
+              "error-container": "#f95630",
+              "secondary-dim": "#00557d"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #f7f6f2; }
+        .headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .pop-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(46, 47, 45, 1);
+        }
+        .pop-shadow-sm {
+            box-shadow: 4px 4px 0px 0px rgba(46, 47, 45, 1);
+        }
+        .comic-border {
+            border: 3px solid #2e2f2d;
+        }
+        .adventure-path {
+            background-image: radial-gradient(#adadaa 2px, transparent 2px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="text-on-surface overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-[#f7f6f2] dark:bg-slate-900 shadow-[0_4px_0_0_rgba(0,0,0,0.05)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#433700] dark:text-[#fdd400] tracking-tight font-['Plus_Jakarta_Sans']">ArtPlay</span>
+<div class="h-8 w-[2px] bg-[#e5e4df] mx-2"></div>
+<nav class="hidden md:flex gap-6">
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full border-2 border-green-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>wifi</span>
+<span>已连接</span>
+</div>
+<button class="p-2 rounded-full hover:bg-[#fdd400]/10 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-2xl text-[#2e2f2d]">notifications</span>
+</button>
+<div class="flex items-center gap-3 bg-surface-container-lowest comic-border py-1 px-3 rounded-full pop-shadow-sm">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface-variant leading-none">Grade 2 Artist</p>
+<p class="font-headline font-extrabold text-sm text-[#433700]">陈小明</p>
+</div>
+<img alt="Student Profile Avatar" class="w-10 h-10 rounded-full border-2 border-primary" data-alt="Close-up portrait of a cheerful young boy with messy hair, wearing a colorful art smock, smiling brightly in a sunny classroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurUE1fVbTRINxpZrLQ2RutVzffOshTa_ZLRjkKnnD1ALYj9K1J3I2HjhHkOPmGpGF4nLMcLzQopsmV-6jF0Ko9fl-DItRhbMNF63e33EMxGE-iQCuN-6ZoSDTHHd4r52e5nVKD67T6EmQ-CsQR2LlnpqIJiLb1_f-S7GA8aJl0NGh6NY7G3sRqWnhaHUucdKdJtHc014s1b9M9xASd5eoDwd5ANqRZU3pxvUhHGs8_1T6p_Px0QFB0SKLhwl-J3hI04t0OVYnNQ"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6 max-w-[1280px] mx-auto min-h-screen">
+<!-- Today's Task Box -->
+<section class="relative mb-12 group">
+<div class="bg-primary-container comic-border rounded-lg p-8 pop-shadow overflow-hidden relative min-h-[160px] flex flex-col justify-center">
+<!-- Decorative background patterns -->
+<div class="absolute top-0 right-0 w-64 h-full opacity-10 pointer-events-none">
+<div class="grid grid-cols-4 gap-2 p-4">
+<div class="w-8 h-8 rounded-full bg-on-primary-container"></div>
+<div class="w-8 h-8 rotate-45 bg-on-primary-container"></div>
+<div class="w-8 h-8 rounded-full bg-on-primary-container"></div>
+<div class="w-8 h-8 rotate-12 bg-on-primary-container"></div>
+</div>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+<div class="flex-1">
+<div class="inline-flex items-center gap-2 bg-on-primary-container text-primary-container px-3 py-1 rounded-full mb-4">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>bolt</span>
+<span class="font-headline font-bold text-sm tracking-tight">课程挑战</span>
+</div>
+<h1 class="font-headline font-black text-4xl text-on-primary-fixed leading-tight">
+                            本节任务：寻找快乐的颜色
+                        </h1>
+<p class="mt-2 text-on-primary-fixed-variant font-medium text-lg">
+                            在你的调色盘里找出 3 种让你感到快乐的颜色，并把它们组合在一起！
+                        </p>
+</div>
+<!-- Updated Progress Bar Section: Dot and Dashed Line Style -->
+<div class="flex flex-col gap-6 min-w-[360px] pt-4">
+<div class="flex justify-between items-end px-1">
+<span class="text-on-primary-fixed font-black text-sm">当前进度: 表达</span>
+<span class="text-on-primary-fixed-variant font-bold text-xs italic">2/5 Steps</span>
+</div>
+<div class="relative flex items-center justify-between px-4">
+<!-- Connecting Dashed Line -->
+<div class="absolute left-8 right-8 h-[3px] border-t-4 border-dashed border-on-primary-container/30 top-1/2 -translate-y-1/2 z-0"></div>
+<div class="absolute left-8 w-[25%] h-[3px] border-t-4 border-dashed border-on-primary-container top-1/2 -translate-y-1/2 z-0"></div>
+<!-- Step 1: 观察 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="text-[10px] font-black uppercase text-on-primary-fixed">观察</span>
+<div class="w-6 h-6 rounded-full bg-on-primary-container comic-border flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[14px] font-black">check</span>
+</div>
+</div>
+<!-- Step 2: 表达 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="text-[10px] font-black uppercase text-on-primary-fixed">表达</span>
+<div class="w-8 h-8 rounded-full bg-white comic-border flex items-center justify-center pop-shadow-sm scale-110">
+<div class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></div>
+</div>
+</div>
+<!-- Step 3: 选择 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="text-[10px] font-black uppercase text-on-primary-fixed opacity-60">选择</span>
+<div class="w-6 h-6 rounded-full bg-white/50 comic-border"></div>
+</div>
+<!-- Step 4: 关系 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="text-[10px] font-black uppercase text-on-primary-fixed opacity-60">关系</span>
+<div class="w-6 h-6 rounded-full bg-white/50 comic-border"></div>
+</div>
+<!-- Step 5: 创作 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="text-[10px] font-black uppercase text-on-primary-fixed opacity-60">创作</span>
+<div class="w-6 h-6 rounded-full bg-white/50 comic-border"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<!-- Left Column: Adventure Map -->
+<div class="lg:col-span-8 bg-surface-container-low comic-border rounded-lg p-6 pop-shadow min-h-[600px] relative adventure-path overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline font-black text-2xl flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">map</span>
+                        闯关大地图
+                    </h2>
+<div class="flex gap-2">
+<div class="bg-primary-container px-4 py-1 rounded-full comic-border text-sm font-bold">已解锁: 2/8</div>
+</div>
+</div>
+<!-- Winding Path Visualization -->
+<div class="relative w-full h-[500px] flex items-center justify-center">
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 800 500">
+<path d="M 100 400 Q 200 400 250 300 T 400 200 T 550 300 T 700 250" fill="none" stroke="#adadaa" stroke-dasharray="20 15" stroke-linecap="round" stroke-width="12"></path>
+<path d="M 100 400 Q 200 400 250 300" fill="none" opacity="0.6" stroke="#6d5a00" stroke-dasharray="20 15" stroke-linecap="round" stroke-width="12"></path>
+</svg>
+<div class="absolute left-[8%] bottom-[15%] flex flex-col items-center">
+<div class="w-16 h-16 bg-primary rounded-full comic-border flex items-center justify-center text-on-primary pop-shadow-sm z-10">
+<span class="material-symbols-outlined">check</span>
+</div>
+<span class="mt-2 font-bold text-xs bg-white px-2 rounded-full comic-border">情绪的色彩</span>
+</div>
+<!-- Marker moved to "不迷路的新手" -->
+<div class="absolute left-[26%] bottom-[38%] flex flex-col items-center">
+<div class="w-24 h-24 bg-primary-container rounded-full comic-border flex items-center justify-center text-on-primary-container pop-shadow scale-110 z-20 animate-bounce">
+<span class="material-symbols-outlined text-4xl">explore</span>
+</div>
+<span class="mt-4 font-black text-sm bg-on-primary-container text-primary-container px-3 py-1 rounded-full comic-border whitespace-nowrap">当前：不迷路的新手</span>
+</div>
+<div class="absolute left-[45%] top-[35%] flex flex-col items-center opacity-40">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full comic-border flex items-center justify-center text-on-surface-variant z-10">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="mt-2 font-bold text-xs bg-white px-2 rounded-full comic-border">触摸博物馆</span>
+</div>
+<div class="absolute left-[65%] bottom-[35%] flex flex-col items-center opacity-40">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full comic-border flex items-center justify-center text-on-surface-variant z-10">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="mt-2 font-bold text-xs">隐形的安全卫士</span>
+</div>
+<div class="absolute right-[8%] top-[45%] flex flex-col items-center opacity-40">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full comic-border flex items-center justify-center text-on-surface-variant z-10">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="mt-2 font-bold text-xs">蚂蚁的巨人国</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Functional Blocks -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Block 1: Enter Canvas -->
+<button class="w-full group text-left overflow-hidden bg-secondary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-secondary-container text-secondary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>brush</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-secondary-container">进入画布</h3>
+<p class="text-on-secondary-fixed-variant font-medium">自由创作你的艺术作品</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-secondary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</button>
+<!-- Block 2: Library -->
+<button class="w-full group text-left overflow-hidden bg-tertiary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-tertiary-container text-tertiary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>auto_stories</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-tertiary-container">素材库</h3>
+<p class="text-on-tertiary-fixed-variant font-medium">发现有趣的贴纸和背景</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-tertiary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</button>
+<!-- Block 3: Portfolio -->
+<button class="w-full group text-left overflow-hidden bg-surface-container-highest comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-surface text-surface rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>folder_special</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-surface">我的作品</h3>
+<p class="text-on-surface-variant font-medium">回顾你的成长轨迹</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</button>
+<!-- Block 4: Class Gallery -->
+<button class="w-full group text-left overflow-hidden bg-primary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-primary-container text-primary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>forum</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-primary-container">班级互评墙</h3>
+<p class="text-on-primary-fixed-variant font-medium">给小伙伴的作品点个赞</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-primary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- Navigation Shell Logic -->
+<footer class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#f7f6f2] flex justify-around items-center px-4 z-50 border-t-2 border-[#e5e4df]">
+<button class="flex flex-col items-center gap-1 text-[#433700]">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>home</span>
+<span class="text-[10px] font-bold">首页</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">explore</span>
+<span class="text-[10px] font-bold">探索</span>
+</button>
+<div class="relative -top-6">
+<button class="w-14 h-14 rounded-full bg-primary-container comic-border pop-shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container font-black">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">collections</span>
+<span class="text-[10px] font-bold">作品</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">person</span>
+<span class="text-[10px] font-bold">我的</span>
+</button>
+</footer>
+</body></html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtThink - PBL STUDIO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/studio.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="js/work_service.js"></script>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="studio-nav">
+        <div style="display:flex; align-items:center; gap:20px;">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>返回</span>
+            </a>
+        </div>
+
+        <!-- Moved Toolbar -->
+        <div class="header-tools">
+            <button class="tool-btn" data-tool="pencil">
+                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                <span>铅笔</span>
+            </button>
+            <button class="tool-btn active" data-tool="crayon">
+                <svg viewBox="0 0 24 24"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34a2 2 0 0 0-2.83 0L2 19.83v2.17h2.17l14.54-14.54a2 2 0 0 0 0-2.83zM10 15l-1-1 3.54-3.54 1 1L10 15z"/></svg>
+                <span>蜡笔</span>
+            </button>
+            <button class="tool-btn" data-tool="marker">
+                <svg viewBox="0 0 24 24"><path d="M19.98 5.79l-4.73-4.73a.996.996 0 0 0-1.41 0l-1.03 1.03-3.6 3.6-2.5-2.5a.996.996 0 0 0-1.41 0l-4.59 4.59a.996.996 0 0 0 0 1.41l2.5 2.5-2.5 2.5a.996.996 0 0 0 0 1.41l3.54 3.54a.996.996 0 0 0 1.41 0l2.5-2.5 2.5 2.5a.996.996 0 0 0 1.41 0l8.91-8.91a.996.996 0 0 0 0-1.41v-.01c-.13-.39-.37-.73-.67-1zM6.55 12.33l-2.09-2.09L7.54 7.15l2.09 2.09-3.08 3.09zm5.09-5.09l-3.08-3.09 2.09-2.09 3.08 3.09-2.09 2.09z"/></svg>
+                <span>马克笔</span>
+            </button>
+            <button class="tool-btn" data-tool="eraser">
+                <svg viewBox="0 0 24 24"><path d="M15.14 3c-.51 0-1.02.2-1.41.59L2.59 14.73c-.78.77-.78 2.04 0 2.83L5.03 20h7.66l8.72-8.73c.78-.77.78-2.04 0-2.82l-4.86-4.86A1.986 1.986 0 0 0 15.14 3zm-2.83 14H6.46l-2.45-2.45c-.39-.39-.39-1.03 0-1.42l3.41-3.41 5.86 5.86-1.57 1.57-.6.55-.26-.14-.54-.56z"/></svg>
+                <span>橡皮</span>
+            </button>
+
+            <!-- Magic Brush System -->
+            <button class="tool-btn" data-tool="magic-brush" id="magic-brush-btn" onclick="toggleMagicBrushMenu(event)">
+                <svg viewBox="0 0 24 24"><path d="M7 2l-.94 2.06L4 5l2.06.94L7 8l.94-2.06L10 5l-2.06-.94zm9.36 3.16a2.006 2.006 0 0 0-.58-3.08l-2.14-1.24a1.99 1.99 0 0 0-2.6.58L2.09 16c-.34.54-.42 1.25-.16 1.83l.87 2A2 2 0 0 0 4.6 21h10.98a2 2 0 0 0 1.86-1.25l1-2.31c.21-.49.19-1.07-.07-1.55L16.36 5.16z"/></svg>
+                <span>魔法画笔</span>
+            </button>
+            <div id="magic-brush-panel" class="magic-brush-panel" style="display:none;">
+                <div class="panel-title">特殊课程画笔</div>
+                <div class="brush-grid">
+                    <button class="mb-item" onclick="selectMagicBrush('leaf', 'eco')">
+                        <span class="material-symbols-outlined">eco</span>
+                        <span>树叶</span>
+                    </button>
+                    <button class="mb-item" onclick="selectMagicBrush('branch', 'nature')">
+                        <span class="material-symbols-outlined">nature</span>
+                        <span>树枝</span>
+                    </button>
+                    <button class="mb-item" onclick="selectMagicBrush('dirt', 'landscape')">
+                        <span class="material-symbols-outlined">landscape</span>
+                        <span>泥土</span>
+                    </button>
+                    <button class="mb-item" onclick="selectMagicBrush('mushroom', 'grass')">
+                        <span class="material-symbols-outlined">grass</span>
+                        <span>蘑菇</span>
+                    </button>
+                    <button class="mb-item" onclick="selectMagicBrush('vine', 'water_lux')">
+                        <span class="material-symbols-outlined">water_lux</span>
+                        <span>藤蔓</span>
+                    </button>
+                    <button class="mb-item" onclick="selectMagicBrush('ice', 'ac_unit')">
+                        <span class="material-symbols-outlined">ac_unit</span>
+                        <span>冰块</span>
+                    </button>
+                </div>
+                <!-- Settings Panel -->
+                <div class="brush-settings" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="font-size: 11px; font-weight: bold; color: #555; display: flex; justify-content: space-between;">
+                        <span>贴纸大小</span>
+                        <span id="brush-size-val">35</span>
+                    </div>
+                    <input type="range" id="brush-size-slider" min="10" max="100" value="35" style="accent-color: #0084D0;" oninput="document.getElementById('brush-size-val').innerText=this.value; window.customBrushSize=parseInt(this.value);">
+                    
+                    <div style="font-size: 11px; font-weight: bold; color: #555; display: flex; justify-content: space-between;">
+                        <span>贴纸间隙</span>
+                        <span id="brush-spacing-val">30</span>
+                    </div>
+                    <input type="range" id="brush-spacing-slider" min="10" max="100" value="30" style="accent-color: #0084D0;" oninput="document.getElementById('brush-spacing-val').innerText=this.value; window.customBrushSpacing=parseInt(this.value);">
+
+                    <div style="font-size: 11px; font-weight: bold; color: #555; display: flex; justify-content: space-between; align-items: center;">
+                        <span>随机方向转动</span>
+                        <input type="checkbox" id="brush-random-rot" checked onchange="window.customBrushRandomRot=this.checked;" style="accent-color: #0084D0; width: 16px; height: 16px; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+
+            <button class="tool-btn" data-tool="colors" id="color-wheel-btn">
+                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S15.67 9 16.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                <span>颜色</span>
+                <input type="color" id="color-picker" style="display:none;" value="#005086">
+            </button>
+            <button class="tool-btn undo-btn">
+                <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                <span>撤销</span>
+            </button>
+            <!-- AI Magic Wand Feature -->
+            <div class="ai-wand-wrapper" style="position: relative;">
+                <button class="tool-btn magic-wand" id="ai-wand-btn" onclick="handleWandClick(event)">
+                    <!-- Default Wand Icon -->
+                    <svg id="wand-icon-default" viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.7 11.05c.39-.39.39-1.02 0-1.41l-2.33-2.35zm-1.03 5.49l-2.12-2.12 2.44-2.44 2.12 2.12-2.44 2.44z"/></svg>
+                    <!-- Course Icon container (hidden initially) -->
+                    <span id="wand-icon-course" class="material-symbols-outlined" style="display:none; font-size:24px; margin-bottom:3px;"></span>
+                    <span>AI魔法棒</span>
+                </button>
+            </div>
+        </div>
+
+        <button class="send-btn" onclick="saveToMyWorks()">
+            <span>保存作品</span>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- 主工作区 -->
+    <main class="studio-main">
+        <!-- Asset Sidebar -->
+        <aside class="studio-assets" id="treasure-sidebar">
+            <!-- Onboarding Tooltip -->
+            <div id="drag-tooltip" class="onboarding-tooltip">
+                可以尝试拖拽图片到画布上哦！
+                <div class="tooltip-arrow"></div>
+            </div>
+
+            <!-- Top: Treasure Box -->
+            <div class="asset-group" style="width: 100%;">
+                
+                <!-- Tabs -->
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" id="tab-personal">
+                        <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                        <span>随手拍</span>
+                        <div id="sync-notification" class="notif-dot" style="display:none;"></div>
+                    </button>
+                    <button class="tab-btn" id="tab-task">
+                        <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+                        <span>任务包</span>
+                    </button>
+                </div>
+
+                <div class="asset-title" style="margin-top: 5px; cursor:pointer;" onclick="document.getElementById('file-upload').click()">
+                    <!-- Upload hint for active tab -->
+                    <span style="font-size:10px; color:#888; text-decoration:underline;" id="upload-hint">点击上传更多</span>
+                    <input type="file" id="file-upload" accept="image/*" style="display:none;" onchange="handleFileUpload(event)">
+                </div>
+                
+                <!-- Scrollable Photo Lists -->
+                <div id="asset-list-personal" class="asset-list-container">
+                    <!-- Personal photos will be added here -->
+                </div>
+                
+                <div id="asset-list-task" class="asset-list-container" style="display:none;">
+                    <!-- Task photos will be added here -->
+                </div>
+            </div>
+
+            <!-- Spacer to push layers to bottom -->
+            <div style="flex-grow: 1; min-height: 20px;"></div>
+
+            <!-- Bottom: Simplified Layers Panel -->
+            <div class="layers-widget-v2" id="layer-manager">
+                <div class="layer-title" style="font-size: 12px; font-weight:800; color:#888; margin-bottom:10px; text-align:center;">图层管理</div>
+
+                <div class="layer-row active" data-layer="photos">
+                    <span class="layer-name">照片层</span>
+                    <button class="visibility-toggle" onclick="toggleLayer('photos')">
+                        <svg class="eye-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </button>
+                </div>
+                <div class="layer-row" data-layer="graffiti">
+                    <span class="layer-name">绘画层</span>
+                    <button class="visibility-toggle" onclick="toggleLayer('graffiti')">
+                        <svg class="eye-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    </button>
+                </div>
+                <div class="layer-row" data-layer="bg" style="flex-wrap: wrap;">
+                    <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                        <span class="layer-name">背景层</span>
+                        <button class="visibility-toggle" onclick="toggleLayer('bg')">
+                            <svg class="eye-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </button>
+                    </div>
+                    <div id="bg-opacity-control" style="width:100%; margin-top:8px; display:none;">
+                        <div style="display:flex; justify-content:space-between; font-size:10px; color:#888; margin-bottom: 2px;">
+                            <span>透明度</span>
+                            <span id="bg-opacity-val">100%</span>
+                        </div>
+                        <input type="range" id="bg-opacity-slider" min="0" max="100" value="100" style="width:100%; height:4px; accent-color:#005086; cursor:pointer;" oninput="window.setBgOpacity(this.value)">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Canvas Area -->
+        <section class="canvas-wrapper">
+            <!-- AI Loading Overlay -->
+            <div id="ai-loading-overlay" class="ai-overlay" style="display:none;">
+                <div class="ai-loading-content">
+                    <div class="wand-spinner">✨</div>
+                    <p>AI 正在施展魔法...</p>
+                    <div class="ai-progress-bar">
+                        <div class="ai-progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="canvas-container" id="main-canvas-container" style="position:relative;">
+                <button id="delete-bg-btn" onclick="clearBackground()" style="display:none; position:absolute; top:15px; right:15px; z-index:100; background:#FF4081; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2);">删除背景图</button>
+                <canvas id="bg-layer" style="z-index: 1; position: absolute; background: white;"></canvas>
+                <!-- HTML Layer for interactable photos (Polaroids) -->
+                <div id="photo-layer-html" style="z-index: 2; position: absolute; width:100%; height:100%; pointer-events: none;"></div>
+                <canvas id="drawing-canvas" style="z-index: 3; position: absolute; background: transparent;"></canvas>
+            </div>
+            
+            <!-- Voice Prompt Button -->
+            <div class="voice-prompt">
+                <div class="text">
+                    <span>你正在画什么？</span>
+                </div>
+                <div class="mic-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部状态栏 -->
+    <footer class="studio-bottom">
+        <div style="display:flex; align-items:center; gap:8px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="#005086" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span style="color:#005086; font-weight:bold;">小艺术家 Leo</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <div class="connection-dot active"></div>
+            <span style="color:var(--text-light);">实时同步中</span>
+        </div>
+    </footer>
+
+    <!-- AI Wand Wheel Modal -->
+    <div id="wand-wheel-modal" class="image-modal-overlay" style="display:none; z-index: 21000; flex-direction: column;">
+        <div style="font-size: 24px; font-weight: bold; color: white; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">选择魔法提示词</div>
+        
+        <!-- Active Frame Indicator (Fixed at Top) -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -150px); width: 80px; height: 80px; border: 4px solid var(--primary-yellow); border-radius: 50%; z-index: 21001; pointer-events: none; box-shadow: 0 0 20px rgba(255, 212, 0, 0.6);"></div>
+        
+        <div id="wand-wheel-container" class="wheel-container">
+            <div id="wand-wheel" class="wheel-spin">
+                <div class="wheel-item" data-index="0" data-course="1" data-icon="palette"><span class="material-symbols-outlined">palette</span></div>
+                <div class="wheel-item" data-index="1" data-course="2" data-icon="directions"><span class="material-symbols-outlined">directions</span></div>
+                <div class="wheel-item" data-index="2" data-course="3" data-icon="touch_app"><span class="material-symbols-outlined">touch_app</span></div>
+                <div class="wheel-item" data-index="3" data-course="4" data-icon="security"><span class="material-symbols-outlined">security</span></div>
+                <div class="wheel-item" data-index="4" data-course="5" data-icon="bug_report"><span class="material-symbols-outlined">bug_report</span></div>
+                <div class="wheel-item" data-index="5" data-course="6" data-icon="accessible"><span class="material-symbols-outlined">accessible</span></div>
+                <div class="wheel-item" data-index="6" data-course="7" data-icon="category"><span class="material-symbols-outlined">category</span></div>
+                <div class="wheel-item" data-index="7" data-course="8" data-icon="recycling"><span class="material-symbols-outlined">recycling</span></div>
+                <div class="wheel-item" data-index="8" data-course="9" data-icon="architecture"><span class="material-symbols-outlined">architecture</span></div>
+            </div>
+        </div>
+
+        <button onclick="confirmWandSelection()" class="modal-btn confirm" style="margin-top: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 18px; padding: 15px 50px; z-index: 21002;">确认选择</button>
+        <button onclick="closeWandWheel()" class="image-modal-close" style="top: 20px; right: 20px; z-index: 21002;"><svg viewBox="0 0 24 24"><path stroke-width="2" d="M18 6L6 18M6 6l12 12"></path></svg></button>
+    </div>
+
+    <!-- Course 9 AI Magic Modal -->
+    <div id="course9-ai-modal" class="image-modal-overlay" style="display:none; z-index: 21000; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px; border-radius: 20px; max-width: 600px; width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative;">
+            <button onclick="document.getElementById('course9-ai-modal').style.display='none'" class="image-modal-close" style="top: 15px; right: 15px; z-index: 21002; position: absolute; border:none; background:none; cursor:pointer;"><svg viewBox="0 0 24 24" width="24" height="24"><path stroke="#000" stroke-width="2" d="M18 6L6 18M6 6l12 12"></path></svg></button>
+            <h2 style="color: #005086; margin-bottom: 20px;">设计我的奇妙大桥 🌉</h2>
+            
+            <div style="text-align: left; margin-bottom: 20px;">
+                <h3 style="font-size: 16px; color: #FF4081; margin-bottom: 10px;">1. 你画的是哪种桥梁骨架？</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="c9-structure-options">
+                    <label><input type="radio" name="c9_structure" value="beam" checked> 直线/梁桥</label>
+                    <label><input type="radio" name="c9_structure" value="arch"> 弧线/拱桥</label>
+                    <label><input type="radio" name="c9_structure" value="suspension"> U型/悬索桥</label>
+                    <label><input type="radio" name="c9_structure" value="cable"> 伞状/斜拉桥</label>
+                </div>
+            </div>
+
+            <div style="text-align: left; margin-bottom: 30px;">
+                <h3 style="font-size: 16px; color: #FF4081; margin-bottom: 10px;">2. 添加自然魔法素材！(可多选)</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="c9-material-options">
+                    <label><input type="checkbox" value="mushroom"> 发光蘑菇</label>
+                    <label><input type="checkbox" value="vine"> 绿色藤蔓</label>
+                    <label><input type="checkbox" value="ice"> 透明冰块</label>
+                    <label><input type="checkbox" value="rainbow"> 七色彩虹</label>
+                    <label><input type="checkbox" value="leaves"> 发光树叶</label>
+                </div>
+            </div>
+
+            <button onclick="generateCourse9Magic()" class="modal-btn confirm" style="box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 18px; padding: 12px 40px; background: #FF4081; border: none; border-radius: 30px; color: white; cursor: pointer; font-weight: bold;">施展魔法 ✨</button>
+        </div>
+    </div>
+    <script>
+        function generateCourse9Magic() {
+            const structureVal = document.querySelector('input[name="c9_structure"]:checked').value;
+            let structureStr = "";
+            switch(structureVal) {
+                case 'beam': structureStr = "a straight flat beam bridge crossing the river, solid straight bridge deck"; break;
+                case 'arch': structureStr = "a beautiful curved arch bridge spanning the river, elegant semi-circular structure"; break;
+                case 'suspension': structureStr = "a magnificent suspension bridge with U-shaped drooping magical cables and two tall support towers"; break;
+                case 'cable': structureStr = "a grand cable-stayed bridge with straight diagonal cables resembling a tent structure"; break;
+            }
+
+            const matCheckboxes = document.querySelectorAll('#c9-material-options input[type="checkbox"]:checked');
+            let materialsArr = [];
+            matCheckboxes.forEach(cb => {
+                switch(cb.value) {
+                    case 'mushroom': materialsArr.push("constructed entirely of giant glowing mushrooms and magical bioluminescent fungi"); break;
+                    case 'vine': materialsArr.push("woven densely with thick green magical vines and blossoming fairy flowers"); break;
+                    case 'ice': materialsArr.push("made of sparkling crystal clear ice and glowing frost"); break;
+                    case 'rainbow': materialsArr.push("radiating with colorful glowing rainbow light bridges"); break;
+                    case 'leaves': materialsArr.push("built from giant bioluminescent leaves and sturdy ancient branches"); break;
+                }
+            });
+            let materialStr = materialsArr.length > 0 ? materialsArr.join(" and ") : "made of magical sturdy materials";
+
+            const fixedScene = "situated in a magical fairy tale enchanted forest, a rushing river flowing underneath, little cute rabbit waiting on the riverbank, dappled sunlight filtering through the trees, dreamy atmosphere";
+            const prefix = "High quality 3D children's picture book illustration, Disney Pixar style animation,";
+            const suffix = "vibrant and bright colors, extremely detailed, Unreal Engine 5 render, octane render, soft magical lighting, volumetric light, 8k resolution, masterpiece, best quality.";
+
+            // Final Prompt
+            const finalPrompt = `${prefix} [${structureStr}], [${materialStr}], ${fixedScene}, ${suffix}`;
+            const negPrompt = "ugly, broken, unstable, collapsing, realistic photo, dark, scary, horror, text, watermark, bad proportions.";
+
+            document.getElementById('course9-ai-modal').style.display = 'none';
+            if (typeof window.stylizeCanvas === 'function') {
+                window.stylizeCanvas(finalPrompt, negPrompt);
+            }
+        }
+    </script>
+
+    <script src="js/task_assets.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/ai_service.js"></script>
+    <script>
+        // Layer Selection & Drag Reorder
+        const lm = document.getElementById('layer-manager');
+        let draggedRow = null;
+
+        // Selection Logic
+        lm.addEventListener('click', (e) => {
+            // Ignore if clicking range slider
+            if (e.target.tagName === 'INPUT') return;
+
+            const row = e.target.closest('.layer-row');
+            if (row) {
+                const rows = lm.querySelectorAll('.layer-row');
+                rows.forEach(r => r.classList.remove('active'));
+                row.classList.add('active');
+                
+                // Toggle Delete Background Button visibility and Opacity Control
+                if (row.getAttribute('data-layer') === 'bg') {
+                    document.getElementById('delete-bg-btn').style.display = 'block';
+                    document.getElementById('bg-opacity-control').style.display = 'block';
+                } else {
+                    document.getElementById('delete-bg-btn').style.display = 'none';
+                    document.getElementById('bg-opacity-control').style.display = 'none';
+                }
+            }
+        });
+
+        function updateCanvasStacking() {
+            const rows = lm.querySelectorAll('.layer-row');
+            rows.forEach((row, index) => {
+                const layerId = row.getAttribute('data-layer');
+                const el = document.getElementById(
+                    layerId === 'graffiti' ? 'drawing-canvas' : 
+                    layerId === 'bg' ? 'bg-layer' : 
+                    'photo-layer-html'
+                );
+                if (el) {
+                    // Top row in sidebar = Highest z-index (length - index)
+                    // We have 3 layers, so z-index will be 3, 2, 1
+                    el.style.zIndex = rows.length - index;
+                }
+            });
+        }
+
+        // Initialize stacking on load
+        updateCanvasStacking();
+
+        function saveToMyWorks() {
+            if (typeof window.saveMergedCanvas === 'function') {
+                window.saveMergedCanvas();
+            }
+        }
+
+        // --- AI Wand Interaction Logic ---
+        let wandClickTimer = null;
+        function handleWandClick(event) {
+            event.preventDefault();
+            if (wandClickTimer) {
+                // Double Click detected
+                clearTimeout(wandClickTimer);
+                wandClickTimer = null;
+                openWandWheel();
+            } else {
+                // Potential Single Click
+                wandClickTimer = setTimeout(() => {
+                    wandClickTimer = null;
+                    if (window.activeCourseId === '9') {
+                        document.getElementById('course9-ai-modal').style.display = 'flex';
+                    } else if (typeof window.stylizeCanvas === 'function') {
+                        window.stylizeCanvas();
+                    } else {
+                        console.error("stylizeCanvas function not found");
+                    }
+                }, 250); 
+            }
+        }
+
+        // --- Rotating Wand Wheel Logic ---
+        let wheelAngle = 0;
+        let isDraggingWheel = false;
+        let pStartY = 0;
+        let pStartX = 0;
+        let startAngle = 0;
+        const wheel = document.getElementById('wand-wheel');
+        const wheelItems = document.querySelectorAll('.wheel-item');
+        let selectedIconIndex = 0; 
+        const WHEEL_RADIUS = 120; // Distance from center 
+
+        function openWandWheel() {
+            document.getElementById('wand-wheel-modal').style.display = 'flex';
+            // Init items smoothly
+            wheel.style.transition = 'none';
+            updateWheelSelection();
+        }
+
+        function closeWandWheel() {
+            document.getElementById('wand-wheel-modal').style.display = 'none';
+        }
+
+        function confirmWandSelection() {
+            const activeItem = wheelItems[selectedIconIndex];
+            if(activeItem) {
+                const cId = activeItem.getAttribute('data-course');
+                const iName = activeItem.getAttribute('data-icon');
+                
+                document.getElementById('wand-icon-default').style.display = 'none';
+                const courseIcon = document.getElementById('wand-icon-course');
+                courseIcon.style.display = 'inline-block';
+                courseIcon.innerHTML = iName;
+                
+                const btn = document.getElementById('ai-wand-btn');
+                btn.style.transform = 'scale(1.1) rotate(5deg)';
+                setTimeout(() => btn.style.transform = '', 200);
+                
+                window.activeCourseId = cId;
+            }
+            closeWandWheel();
+        }
+        
+        const wheelContainer = document.getElementById('wand-wheel-container');
+        
+        wheelContainer.addEventListener('pointerdown', (e) => {
+            isDraggingWheel = true;
+            pStartX = e.clientX;
+            pStartY = e.clientY;
+            startAngle = wheelAngle;
+            wheel.style.transition = 'none'; 
+            e.preventDefault();
+        });
+
+        window.addEventListener('pointermove', (e) => {
+            if (!isDraggingWheel) return;
+            const rect = wheelContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const startAngleRad = Math.atan2(pStartY - centerY, pStartX - centerX);
+            const currentAngleRad = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            
+            let deltaAngle = (currentAngleRad - startAngleRad) * (180 / Math.PI);
+            
+            if (deltaAngle > 180) deltaAngle -= 360;
+            if (deltaAngle < -180) deltaAngle += 360;
+            
+            wheelAngle = startAngle + deltaAngle;
+            wheel.style.transform = `rotate(${wheelAngle}deg)`;
+            updateWheelSelection();
+        });
+
+        window.addEventListener('pointerup', (e) => {
+            if (!isDraggingWheel) return;
+            isDraggingWheel = false;
+            
+            const degreesPerItem = 40; 
+            let snapIndex = Math.round(wheelAngle / degreesPerItem);
+            wheelAngle = snapIndex * degreesPerItem;
+            
+            wheel.style.transition = 'transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+            wheel.style.transform = `rotate(${wheelAngle}deg)`;
+            
+            updateWheelSelection();
+        });
+
+        function updateWheelSelection() {
+            const degreesPerItem = 40;
+            let snapIndex = Math.round(wheelAngle / degreesPerItem);
+            let activeIdx = (-snapIndex) % 9;
+            if (activeIdx < 0) activeIdx += 9;
+            selectedIconIndex = activeIdx;
+            
+            wheelItems.forEach((item, idx) => {
+                const baseAngle = idx * 40;
+                const innerIcon = item.querySelector('.material-symbols-outlined');
+                
+                // Rotates element around center then counters its own rotation to stay upright
+                const transformStr = `rotate(${baseAngle}deg) translateY(-${WHEEL_RADIUS}px) rotate(${-baseAngle - wheelAngle}deg)`;
+                
+                if (idx === activeIdx) {
+                    item.style.opacity = '1';
+                    item.style.transform = transformStr + ' scale(1.25)';
+                    item.style.borderColor = 'var(--primary-yellow)';
+                    innerIcon.style.color = 'var(--primary-yellow)';
+                    item.style.boxShadow = '0 10px 25px rgba(255, 212, 0, 0.5)';
+                    item.style.zIndex = '10';
+                } else {
+                    item.style.opacity = '0.5';
+                    item.style.transform = transformStr + ' scale(0.9)';
+                    item.style.borderColor = '#FF4081';
+                    innerIcon.style.color = '#FF4081';
+                    item.style.boxShadow = 'none';
+                    item.style.zIndex = '1';
+                }
+            });
+        }
+
+        // --- Magic Brush Panel Logic ---
+        function toggleMagicBrushMenu(event) {
+            event.stopPropagation();
+            const panel = document.getElementById('magic-brush-panel');
+            if (panel.style.display === 'flex') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'flex';
+                // Close color picker or other popups if any here, if applicable
+            }
+        }
+
+        function selectMagicBrush(brushType, iconName) {
+            // Update active state in toolbar
+            const btn = document.getElementById('magic-brush-btn');
+            
+            // Remove active from other normal brush buttons
+            document.querySelectorAll('.tool-btn').forEach(b => {
+                if(b.getAttribute('data-tool') && b.getAttribute('data-tool') !== 'colors' && !b.classList.contains('magic-wand')) {
+                    b.classList.remove('active');
+                }
+            });
+            btn.classList.add('active');
+
+            // Hide the panel
+            document.getElementById('magic-brush-panel').style.display = 'none';
+
+            // Custom UI feedback: replace the button's SVG or just give it a bounce
+            btn.style.transform = 'scale(1.1)';
+            setTimeout(() => btn.style.transform = '', 200);
+
+            // You could store the active brush type in a global config
+            if (typeof window.setBrush === 'function') {
+                window.setBrush(brushType);
+            }
+        }
+
+        // Add to document click listener to close panel
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('magic-brush-panel');
+            if (panel && panel.style.display === 'flex' && !e.target.closest('#magic-brush-btn') && !e.target.closest('#magic-brush-panel')) {
+                panel.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
