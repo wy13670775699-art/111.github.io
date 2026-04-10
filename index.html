@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>ArtThink - 学生版大厅</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#86cbff", "on-secondary-container": "#004c71",
+              "secondary-fixed": "#a7d7ff", "on-primary-container": "#594a00",
+              "primary-fixed-dim": "#edc600", "surface-dim": "#d4d5d0",
+              "on-secondary-fixed-variant": "#00567f", "inverse-on-surface": "#9d9d9a",
+              "on-primary-fixed": "#433700", "surface-bright": "#f7f6f2",
+              "on-tertiary-container": "#66002b", "secondary": "#00618f",
+              "outline": "#767774", "on-tertiary-fixed": "#380014",
+              "on-surface": "#2e2f2d", "surface-container-highest": "#ddddd8",
+              "tertiary-dim": "#a00047", "tertiary-fixed-dim": "#ff769b",
+              "surface": "#f7f6f2", "tertiary": "#b60051",
+              "surface-container-low": "#f1f1ed", "primary-container": "#fdd400",
+              "on-background": "#2e2f2d", "surface-tint": "#6d5a00",
+              "inverse-primary": "#fdd400", "on-primary": "#fff2ce",
+              "on-primary-fixed-variant": "#645300", "tertiary-container": "#ff8fa9",
+              "inverse-surface": "#0d0f0d", "on-tertiary": "#ffeff0",
+              "surface-container": "#e8e8e4", "secondary-container": "#a7d7ff",
+              "on-secondary-fixed": "#003855", "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#770033", "primary-fixed": "#fdd400",
+              "outline-variant": "#adadaa", "surface-variant": "#ddddd8",
+              "tertiary-fixed": "#ff8fa9", "on-secondary": "#eaf4ff",
+              "primary": "#6d5a00", "surface-container-high": "#e3e3de",
+              "on-surface-variant": "#5b5c59", "primary-dim": "#5f4e00",
+              "error": "#b02500", "error-dim": "#b92902", "on-error": "#ffefec",
+              "background": "#f7f6f2", "on-error-container": "#520c00",
+              "error-container": "#f95630", "secondary-dim": "#00557d"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"], "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #f7f6f2; }
+        .headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .pop-shadow { box-shadow: 8px 8px 0px 0px rgba(46, 47, 45, 1); }
+        .pop-shadow-sm { box-shadow: 4px 4px 0px 0px rgba(46, 47, 45, 1); }
+        .comic-border { border: 3px solid #2e2f2d; }
+        .adventure-path { background-image: radial-gradient(#adadaa 2px, transparent 2px); background-size: 24px 24px; }
+    </style>
+</head>
+<body class="text-on-surface overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 bg-[#f7f6f2] dark:bg-slate-900 shadow-[0_4px_0_0_rgba(0,0,0,0.05)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#433700] dark:text-[#fdd400] tracking-tight font-['Plus_Jakarta_Sans']">ArtThink</span>
+<div class="h-8 w-[2px] bg-[#e5e4df] mx-2"></div>
+<nav class="hidden md:flex gap-6"></nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full border-2 border-green-500 font-bold text-xs">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>wifi</span>
+<span>已连接</span>
+</div>
+<button class="p-2 rounded-full hover:bg-[#fdd400]/10 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-2xl text-[#2e2f2d]">notifications</span>
+</button>
+<div class="flex items-center gap-3 bg-surface-container-lowest comic-border py-1 px-3 rounded-full pop-shadow-sm">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface-variant leading-none">学生大厅</p>
+<p class="font-headline font-extrabold text-sm text-[#433700]">小明</p>
+</div>
+<img alt="Student Profile Avatar" class="w-10 h-10 rounded-full border-2 border-primary" src="https://api.dicebear.com/7.x/bottts/svg?seed=student1"/>
+</div>
+</div>
+</header>
+
+<main class="pt-24 pb-12 px-6 max-w-[1280px] mx-auto min-h-screen">
+<!-- Today's Task Box adapted for index.html Tasks -->
+<section class="relative mb-12 group">
+<div class="bg-primary-container comic-border rounded-lg p-6 pop-shadow overflow-hidden relative min-h-[120px] flex flex-col justify-center">
+<div class="absolute top-0 right-0 w-64 h-full opacity-10 pointer-events-none">
+<div class="grid grid-cols-4 gap-2 p-4">
+<div class="w-8 h-8 rounded-full bg-on-primary-container"></div>
+<div class="w-8 h-8 rotate-45 bg-on-primary-container"></div>
+<div class="w-8 h-8 rounded-full bg-on-primary-container"></div>
+<div class="w-8 h-8 rotate-12 bg-on-primary-container"></div>
+</div>
+</div>
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-8">
+<div class="flex-1">
+<div class="inline-flex items-center gap-2 bg-on-primary-container text-primary-container px-3 py-1 rounded-full mb-3">
+<span class="material-symbols-outlined text-sm" style='font-variation-settings: "FILL" 1;'>moving</span>
+<span class="font-headline font-bold text-sm tracking-tight">学习进度</span>
+</div>
+<h1 class="font-headline font-black text-3xl md:text-4xl text-on-primary-fixed leading-tight">当前阶段：选择</h1>
+<p class="mt-2 text-on-primary-fixed-variant font-medium md:text-lg">跟随六步法，循序渐进地完成你的艺术创作吧！</p>
+</div>
+<div class="w-full xl:w-auto min-w-[360px] lg:min-w-[480px]">
+    <div class="flex items-center justify-between w-full bg-white/60 px-6 py-5 rounded-xl comic-border pop-shadow-sm relative">
+        <!-- background line -->
+        <div class="absolute left-[10%] right-[10%] top-[38%] -translate-y-1/2 h-1.5 bg-surface-container-highest rounded-full z-0"></div>
+        <div class="absolute left-[10%] w-[40%] top-[38%] -translate-y-1/2 h-1.5 bg-primary rounded-full z-0"></div>
+        
+        <!-- Step 1: 观察 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm comic-border border-2">1</div>
+            <span class="text-[11px] font-bold text-on-surface">观察</span>
+        </div>
+        <!-- Step 2: 表达 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm comic-border border-2">2</div>
+            <span class="text-[11px] font-bold text-on-surface">表达</span>
+        </div>
+        <!-- Step 3: 选择 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm comic-border border-2 shadow-[0_0_0_3px_rgba(253,212,0,0.5)]">3</div>
+            <span class="text-[11px] font-bold text-primary">选择</span>
+        </div>
+        <!-- Step 4: 关系 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm comic-border border-2">4</div>
+            <span class="text-[11px] font-bold text-on-surface-variant">关系</span>
+        </div>
+        <!-- Step 5: 创作 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm comic-border border-2">5</div>
+            <span class="text-[11px] font-bold text-on-surface-variant">创作</span>
+        </div>
+        <!-- Step 6: 评价 -->
+        <div class="relative z-10 flex flex-col items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm comic-border border-2">6</div>
+            <span class="text-[11px] font-bold text-on-surface-variant">评价</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+<!-- Left Column: Adventure Map with 8 nodes -->
+<div class="lg:col-span-8 bg-[#86dc3d] comic-border rounded-xl p-6 pop-shadow flex flex-col relative overflow-hidden h-[600px]">
+<div class="flex justify-between items-center mb-6 shrink-0 relative z-20">
+<h2 class="font-headline font-black text-2xl flex items-center gap-2 text-white drop-shadow-md">
+<span class="material-symbols-outlined">map</span>闯关大地图
+</h2>
+<div class="flex gap-2">
+<div class="bg-white/90 text-primary-dim px-4 py-1 rounded-full comic-border text-sm font-bold">已解锁: 2/9</div>
+</div>
+</div>
+
+<div class="relative w-full flex-1 flex items-center justify-center">
+    <!-- Map Path SVG -->
+    <svg class="absolute inset-0 w-full h-[500px] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 800 600" style="z-index: 0;">
+        <!-- Base light green winding path for 9 nodes -->
+        <path d="M 50 450 C 250 500 400 370 550 400 C 750 430 750 300 600 250 C 400 200 300 330 150 270 C 0 230 100 100 250 70 C 400 50 550 100 700 50" fill="none" stroke="#a3e635" opacity="0.6" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M 50 450 C 250 500 400 370 550 400 C 750 430 750 300 600 250 C 400 200 300 330 150 270 C 0 230 100 100 250 70 C 400 50 550 100 700 50" fill="none" stroke="#bdf175" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M 50 450 C 250 500 400 370 550 400 C 750 430 750 300 600 250 C 400 200 300 330 150 270 C 0 230 100 100 250 70 C 400 50 550 100 700 50" fill="none" stroke="#d9f99d" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"></path>
+        
+        <!-- Bottom left corner river style -->
+        <path d="M 0 450 C 150 400 250 500 400 450 C 600 350 700 500 800 450 L 800 600 L 0 600 Z" fill="#0ea5e9"></path>
+        <path d="M 0 470 C 150 430 250 530 400 480 C 600 390 700 520 800 480 L 800 600 L 0 600 Z" fill="#38bdf8"></path>
+    </svg>
+
+    <!-- Decorations Container -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <!-- Trees and bushes similar to the picture -->
+        <svg class="absolute left-[8%] top-[22%] w-12 h-16 opacity-90" viewBox="0 0 40 60">
+            <rect x="15" y="40" width="10" height="20" fill="#8B4513" rx="2" />
+            <polygon points="20,5 5,45 35,45" fill="#fca5a5" stroke-linejoin="round" />
+        </svg>
+        <svg class="absolute left-[20%] top-[32%] w-10 h-14 opacity-90" viewBox="0 0 40 60">
+            <rect x="15" y="40" width="10" height="20" fill="#8B4513" rx="2" />
+            <polygon points="20,5 5,45 35,45" fill="#fcd34d" stroke-linejoin="round" />
+        </svg>
+        <svg class="absolute left-[85%] top-[7%] w-12 h-16 opacity-90" viewBox="0 0 40 60">
+            <rect x="15" y="40" width="10" height="20" fill="#8B4513" rx="2" />
+            <polygon points="20,5 5,45 35,45" fill="#fca5a5" stroke-linejoin="round" />
+        </svg>
+        <svg class="absolute left-[78%] top-[52%] w-10 h-14 opacity-90" viewBox="0 0 40 60">
+            <rect x="15" y="40" width="10" height="20" fill="#8B4513" rx="2" />
+            <polygon points="20,5 5,45 35,45" fill="#fcd34d" stroke-linejoin="round" />
+        </svg>
+        
+        <svg class="absolute left-[15%] top-[37%] w-6 h-6 opacity-80" viewBox="0 0 24 24"><path d="M12 21C12 21 4 15 4 9C4 4.5 8 2.5 12 6.5C16 2.5 20 4.5 20 9C20 15 12 21 12 21Z" fill="#15803d"/></svg>
+        <svg class="absolute left-[75%] top-[62%] w-8 h-8 opacity-80" viewBox="0 0 24 24"><path d="M12 21C12 21 4 15 4 9C4 4.5 8 2.5 12 6.5C16 2.5 20 4.5 20 9C20 15 12 21 12 21Z" fill="#15803d"/></svg>
+        <svg class="absolute left-[85%] top-[17%] w-6 h-6 opacity-80" viewBox="0 0 24 24"><path d="M12 21C12 21 4 15 4 9C4 4.5 8 2.5 12 6.5C16 2.5 20 4.5 20 9C20 15 12 21 12 21Z" fill="#15803d"/></svg>
+
+        <!-- Mushrooms -->
+        <svg class="absolute left-[75%] top-[20%] w-6 h-6" viewBox="0 0 24 24">
+            <path d="M4 12C4 6 8 2 12 2C16 2 20 6 20 12L4 12Z" fill="#ef4444"/>
+            <rect x="10" y="12" width="4" height="8" fill="#fef3c7"/>
+            <circle cx="8" cy="8" r="1.5" fill="white"/>
+            <circle cx="16" cy="7" r="1" fill="white"/>
+            <circle cx="12" cy="5" r="1.5" fill="white"/>
+        </svg>
+        <svg class="absolute left-[85%] top-[25%] w-5 h-5" viewBox="0 0 24 24">
+            <path d="M4 12C4 6 8 2 12 2C16 2 20 6 20 12L4 12Z" fill="#3b82f6"/>
+            <rect x="10" y="12" width="4" height="8" fill="#fef3c7"/>
+            <circle cx="8" cy="8" r="1.5" fill="white"/>
+            <circle cx="16" cy="7" r="1" fill="white"/>
+            <circle cx="12" cy="5" r="1.5" fill="white"/>
+        </svg>
+    </div>
+    
+    <!-- Course 1 -->
+    <div class="absolute left-[6%] top-[75%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+        <div class="relative w-24 h-24 bg-white rounded-full p-2 shadow-md z-10 transition-transform hover:scale-105 active:scale-95 cursor-pointer animate-pulse">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white border-4 border-pink-200">
+                <span class="material-symbols-outlined text-4xl">palette</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-xs drop-shadow-md text-center max-w-[100px]">1. 情绪的颜色：<br>探索情绪和色彩的关系</span>
+    </div>
+
+    <!-- Course 2 -->
+    <div class="absolute left-[28%] top-[78%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+        <div class="relative w-24 h-24 bg-white rounded-full p-2 shadow-md z-20 animate-bounce cursor-pointer">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center text-white border-4 border-sky-200">
+                <span class="material-symbols-outlined text-4xl">directions</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-xs drop-shadow-md text-center max-w-[100px]">2. 不迷路的新生：<br>校园路牌设计</span>
+    </div>
+    
+    <!-- Course 3 -->
+    <div class="absolute left-[52%] top-[72%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-teal-400 to-teal-500 flex items-center justify-center text-white border-4 border-teal-200">
+                <span class="material-symbols-outlined text-4xl">touch_app</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">3. 触摸博物馆：<br>用眼睛摸一摸</span>
+    </div>
+
+    <!-- Course 4 -->
+    <div class="absolute left-[80%] top-[62%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white border-4 border-amber-200">
+                <span class="material-symbols-outlined text-4xl">security</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">4. 隐形的安全卫士：<br>危险角落发现与改造</span>
+    </div>
+
+    <!-- Course 5 -->
+    <div class="absolute left-[75%] top-[42%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white border-4 border-green-200">
+                <span class="material-symbols-outlined text-4xl">bug_report</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">5. 蚂蚁的巨人国：<br>低视角的奇遇</span>
+    </div>
+
+    <!-- Course 6 -->
+    <div class="absolute left-[50%] top-[44%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white border-4 border-purple-200">
+                <span class="material-symbols-outlined text-4xl">accessible</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">6. 特别的小伙伴：<br>常识无障碍设计</span>
+    </div>
+
+    <!-- Course 7 -->
+    <div class="absolute left-[26%] top-[48%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white border-4 border-indigo-200">
+                <span class="material-symbols-outlined text-4xl">category</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">7. 几何大搜查：<br>寻找秩序之美</span>
+    </div>
+
+    <!-- Course 8 -->
+    <div class="absolute left-[8%] top-[30%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center text-white border-4 border-lime-200">
+                <span class="material-symbols-outlined text-4xl">recycling</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">8. 垃圾桶里的魔法：<br>废弃物再利用</span>
+    </div>
+
+    <!-- Course 9 -->
+    <div class="absolute left-[50%] top-[12%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70 grayscale">
+        <div class="relative w-20 h-20 bg-white rounded-full p-1.5 shadow-sm z-10 cursor-not-allowed">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center text-white border-4 border-red-200">
+                <span class="material-symbols-outlined text-4xl">architecture</span>
+            </div>
+            <!-- Lock badge -->
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center border-2 border-white text-white shadow-sm">
+                <span class="material-symbols-outlined text-[12px]">lock</span>
+            </div>
+        </div>
+        <span class="mt-2 text-white font-bold text-[10px] drop-shadow-md text-center max-w-[100px]">9. 连接的魔法：<br>我的奇妙大桥</span>
+    </div>
+
+</div>
+</div>
+
+<!-- Right Column: Functional Blocks -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Block 1 -->
+<a href="studio.html" class="block w-full group text-left overflow-hidden bg-secondary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-secondary-container text-secondary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>brush</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-secondary-container">进入画布</h3>
+<p class="text-on-secondary-fixed-variant font-medium">自由创作你的艺术作品</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-secondary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</a>
+
+<!-- Block 2 -->
+<a href="materials.html" class="block w-full group text-left overflow-hidden bg-tertiary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-tertiary-container text-tertiary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>auto_stories</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-tertiary-container">素材库</h3>
+<p class="text-on-tertiary-fixed-variant font-medium">发现有趣的贴纸和背景</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-tertiary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</a>
+
+<!-- Block 3 -->
+<a href="my_works.html" class="block w-full group text-left overflow-hidden bg-surface-container-highest comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-surface text-surface rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>folder_special</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-surface">我的作品</h3>
+<p class="text-on-surface-variant font-medium">回顾你的成长轨迹</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</a>
+
+<!-- Block 4 -->
+<a href="gallery.html" class="block w-full group text-left overflow-hidden bg-primary-container comic-border rounded-lg pop-shadow hover:-translate-y-1 active:translate-y-1 transition-all">
+<div class="p-6 flex items-center gap-4">
+<div class="w-16 h-16 bg-on-primary-container text-primary-fixed rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl" style='font-variation-settings: "FILL" 1;'>forum</span>
+</div>
+<div>
+<h3 class="font-headline font-black text-2xl text-on-primary-container">班级互评墙</h3>
+<p class="text-on-primary-fixed-variant font-medium">给小伙伴的作品点个赞</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-primary-container group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</div>
+</a>
+
+</div>
+</div>
+</main>
+
+<footer class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#f7f6f2] flex justify-around items-center px-4 z-50 border-t-2 border-[#e5e4df]">
+<button class="flex flex-col items-center gap-1 text-[#433700]">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>home</span>
+<span class="text-[10px] font-bold">首页</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">explore</span>
+<span class="text-[10px] font-bold">探索</span>
+</button>
+<div class="relative -top-6">
+<a href="studio.html" class="block w-14 h-14 rounded-full bg-primary-container comic-border pop-shadow-sm flex items-center justify-center hover:-translate-y-1 transition-all">
+<span class="material-symbols-outlined text-on-primary-container font-black">draw</span>
+</a>
+</div>
+<a href="my_works.html" class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">collections</span>
+<span class="text-[10px] font-bold">作品</span>
+</a>
+<button class="flex flex-col items-center gap-1 text-[#2e2f2d]/60">
+<span class="material-symbols-outlined" style="">person</span>
+<span class="text-[10px] font-bold">我的</span>
+</button>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
